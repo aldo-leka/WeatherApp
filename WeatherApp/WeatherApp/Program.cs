@@ -1,12 +1,21 @@
 using WeatherApp.Client.Pages;
 using WeatherApp.Components;
+using WeatherApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+EnvironmentHelper.ValidateEnvironmentVariables();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
@@ -14,6 +23,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+    
+    // Enable Swagger in development
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 else
 {
@@ -24,8 +37,9 @@ else
 
 app.UseHttpsRedirection();
 
-
 app.UseAntiforgery();
+
+app.MapControllers();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
