@@ -20,7 +20,7 @@
         "applicationUrl": "https://localhost:7089;http://localhost:5042",
         "environmentVariables": {
           "ASPNETCORE_ENVIRONMENT": "Development",
-          "WEATHER_API_KEY": "bd71b08eccedbc49a6cd71c21ec064a9"
+          "WEATHER_API_KEY": ""
         }
       }
     }
